@@ -57,8 +57,6 @@ export default function CalendarPage() {
     return sessions.some(s => s.dateTime && new Date(s.dateTime).getTime() === new Date(dateTime).getTime());
   };
 
-  // --- פונקציות הטיפול (Handlers) ---
-
   const handleAddSingle = async (e) => {
     e.preventDefault();
     const [hours, minutes] = formData.time.split(':');
@@ -118,7 +116,6 @@ export default function CalendarPage() {
 
   return (
     <div style={styles.page}>
-      {/* כותרת ופעולות עליונות */}
       <div style={styles.topActions}>
         <div style={styles.headerRight}>
           <h1 style={styles.mainTitle}>יומן טיפולים</h1>
@@ -131,7 +128,6 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {/* ניווט בין חודשים */}
       <div style={styles.subHeader}>
         <div style={styles.navBar}>
           <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))} style={styles.navArrow}>‹</button>
@@ -140,7 +136,6 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {/* לוח השנה */}
       <div style={styles.calendarCard}>
         <div style={styles.grid}>
           {calendarDays.map((d, idx) => {
@@ -183,7 +178,6 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {/* מודאל פרטי תור */}
       {viewingSession && (
         <div style={styles.modalOverlay} onClick={() => setViewingSession(null)}>
           <div style={styles.detailModal} onClick={e => e.stopPropagation()}>
@@ -208,6 +202,7 @@ export default function CalendarPage() {
               <button style={styles.editBtn}>📝</button>
               <button
                 style={styles.recordBtn}
+                // תיקון: patients ברבים כדי להתאים ל-App.js
                 onClick={() => navigate(`/patients/${viewingSession.patientId}`, { state: { openNewSession: true } })}
               >
                 📄 תעד טיפול
@@ -222,7 +217,6 @@ export default function CalendarPage() {
         </div>
       )}
 
-      {/* מודאל תור בודד */}
       {isAddModalOpen && (
         <div style={styles.modalOverlay}>
           <div style={styles.modalContent}>
@@ -240,7 +234,6 @@ export default function CalendarPage() {
         </div>
       )}
 
-      {/* מודאל סדרת תורים */}
       {isSeriesModalOpen && (
         <div style={styles.modalOverlay}>
           <div style={styles.modalContent}>
